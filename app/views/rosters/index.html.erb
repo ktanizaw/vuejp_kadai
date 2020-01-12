@@ -1,31 +1,50 @@
-<p id="notice"><%= notice %></p>
+<!-- <html>
+    <head>
+        <link rel="stylesheet" href="application.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
 
-<h1>Rosters</h1>
+        <div id="app">
+            {{ message }}
+        </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Course</th>
-      <th>Period</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+        <script src="app1.js"></script>
+    </body>
+</html> -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="application.css">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-  <tbody>
-    <% @rosters.each do |roster| %>
-      <tr>
-        <td><%= roster.name %></td>
-        <td><%= roster.course %></td>
-        <td><%= roster.period %></td>
-        <td><%= link_to 'Show', roster %></td>
-        <td><%= link_to 'Edit', edit_roster_path(roster) %></td>
-        <td><%= link_to 'Destroy', roster, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        <!-- 下記の記述でVue.jsをインポートしている -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
 
-<br>
+        <div id="app">
+            <!-- v-model="name"で、Vue.jsで設定したdateとHTMLのinput要素が同期する -->
+            名前：<input v-model="name">
+            コース：<input v-model="cource">
+            受講期：<input v-model="period">
+            <br>
+            <!-- button v-on:click="addStudent"で、buttonがclickされた時に起動するメソッドを選択する -->
+            <button v-on:click="addRoster">入力した生徒を追加する</button>
 
-<%= link_to 'New Roster', new_roster_path %>
+            <ul>
+                <!-- v-for="student in students" で、配列studentsを一つ一つ切り出して変数studentに代入している -->
+                <!-- v-bind:key="student.id"は、切り出された各要素の一意性を確保するために使う -->
+                <li v-for="roster in rosters" v-bind:key="roster.id">
+                    <!-- {{ }} のなかに書いた記述で、Vue.jsのデータの式展開が行える -->
+                    ID {{roster.id}} /
+                    名前 {{roster.name}} /
+                    コース {{roster.cource}} /
+                    受講期 {{roster.period}}
+                </li>
+            </ul>
+        </div>
+
+        <script src="app1.js"></script>
+    </body>
+</html>
